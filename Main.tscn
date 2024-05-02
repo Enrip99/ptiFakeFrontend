@@ -1,0 +1,124 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://SliderTemp.gd" type="Script" id=1]
+[ext_resource path="res://SliderHum.gd" type="Script" id=2]
+[ext_resource path="res://HTTPRequestSend.gd" type="Script" id=3]
+
+[node name="Main" type="Node2D"]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 217.0
+margin_top = 100.0
+margin_right = 704.0
+margin_bottom = 204.0
+
+[node name="GridContainer2" type="GridContainer" parent="VBoxContainer"]
+margin_right = 487.0
+margin_bottom = 80.0
+columns = 3
+
+[node name="NomHum" type="Label" parent="VBoxContainer/GridContainer2"]
+margin_top = 5.0
+margin_right = 81.0
+margin_bottom = 19.0
+text = "Humitat"
+align = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/GridContainer2"]
+margin_left = 85.0
+margin_right = 324.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="ValueHum" type="Label" parent="VBoxContainer/GridContainer2/HBoxContainer"]
+margin_top = 5.0
+margin_right = 28.0
+margin_bottom = 19.0
+text = "29%"
+
+[node name="SliderHum" type="HSlider" parent="VBoxContainer/GridContainer2/HBoxContainer"]
+margin_left = 32.0
+margin_right = 239.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+tick_count = 10
+script = ExtResource( 2 )
+
+[node name="NotifHum" type="CheckBox" parent="VBoxContainer/GridContainer2"]
+margin_left = 328.0
+margin_right = 487.0
+margin_bottom = 24.0
+pressed = true
+text = "Notificar al servidor?"
+
+[node name="NomTemp" type="Label" parent="VBoxContainer/GridContainer2"]
+margin_top = 33.0
+margin_right = 81.0
+margin_bottom = 47.0
+text = "Temperatura"
+align = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/GridContainer2"]
+margin_left = 85.0
+margin_top = 28.0
+margin_right = 324.0
+margin_bottom = 52.0
+
+[node name="ValueTemp" type="Label" parent="VBoxContainer/GridContainer2/HBoxContainer2"]
+margin_top = 5.0
+margin_right = 28.0
+margin_bottom = 19.0
+text = "29%"
+
+[node name="SliderTemp" type="HSlider" parent="VBoxContainer/GridContainer2/HBoxContainer2"]
+margin_left = 32.0
+margin_right = 239.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+min_value = -10.0
+max_value = 50.0
+value = 25.0
+tick_count = 10
+script = ExtResource( 1 )
+
+[node name="NotifTemp" type="CheckBox" parent="VBoxContainer/GridContainer2"]
+margin_left = 328.0
+margin_top = 28.0
+margin_right = 487.0
+margin_bottom = 52.0
+pressed = true
+text = "Notificar al servidor?"
+
+[node name="NomLlum" type="Label" parent="VBoxContainer/GridContainer2"]
+margin_top = 61.0
+margin_right = 81.0
+margin_bottom = 75.0
+text = "Llum"
+align = 2
+
+[node name="CheckboxLlum" type="CheckBox" parent="VBoxContainer/GridContainer2"]
+margin_left = 85.0
+margin_top = 56.0
+margin_right = 324.0
+margin_bottom = 80.0
+text = "Tenim la llum encesa?"
+align = 1
+
+[node name="NotifLlum" type="CheckBox" parent="VBoxContainer/GridContainer2"]
+margin_left = 328.0
+margin_top = 56.0
+margin_right = 487.0
+margin_bottom = 80.0
+pressed = true
+text = "Notificar al servidor?"
+
+[node name="ButtonSend" type="Button" parent="VBoxContainer"]
+margin_top = 84.0
+margin_right = 487.0
+margin_bottom = 104.0
+text = "Envia!"
+
+[node name="HTTPRequestSend" type="HTTPRequest" parent="VBoxContainer/ButtonSend"]
+script = ExtResource( 3 )
+
+[connection signal="pressed" from="VBoxContainer/ButtonSend" to="VBoxContainer/ButtonSend/HTTPRequestSend" method="_on_ButtonSend_pressed"]
